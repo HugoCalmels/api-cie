@@ -1,0 +1,4 @@
+class DessinTempImageSerializer
+  include JSONAPI::Serializer
+  attributes :id, :image, :image_url
+end
