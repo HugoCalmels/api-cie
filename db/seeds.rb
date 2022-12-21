@@ -19,34 +19,87 @@ images_array = JSON.parse(images)
 
 # Types index/blog
 Type.create(label: "carrousel")
-Type.create(label: "profil", title: "Qui est Gaëlle ?")
-Type.create(label: "work", title: "Quel est son travail ?")
-Type.create(label: "product", title: "A quoi ressemble un produit ?")
+Type.create(label: "profil", title: "Qui est Gaëlle ?", desc: Faker::Lorem.paragraph_by_chars(number: 500, supplemental: false))
+Type.create(label: "work", title: "Quel est son travail ?", desc: Faker::Lorem.paragraph_by_chars(number: 500, supplemental: false))
+Type.create(label: "product", title: "A quoi ressemble un produit ?", desc: Faker::Lorem.paragraph_by_chars(number: 500, supplemental: false))
 
 # Images index /blog -- CARROUSEL
-index = 1
+
 5.times do
   h = Home.new(
-  image_url: images_array[index]["image_link"],
+  image_url: images_array[rand(1..50)]["image_link"],
   type_id: 1
 )
 h.save
-index += 1
+
 end
 
 # Images index /blog -- ALL OTHERS
 Home.create(
-  image_url: images_array[1]["image_link"],
+  image_url: images_array[rand(1..50)]["image_link"],
   type_id: 2
 )
 Home.create(
-  image_url: images_array[1]["image_link"],
+  image_url: images_array[rand(1..50)]["image_link"],
   type_id: 3
 )
 Home.create(
-  image_url: images_array[1]["image_link"],
+  image_url: images_array[rand(1..50)]["image_link"],
   type_id: 4
 )
+
+## SEED DES IMAGES GALERIES
+
+
+10.times do 
+  dc = DessinCategory.create(title: Faker::Artist.name)
+
+  100.times do 
+    d = Dessin.new(
+      title: Faker::Color.color_name,
+      image_url: images_array[rand(1..50)]["image_link"],
+      dessin_category_id: dc.id,
+      ref: rand(1..1000),
+      width: rand(10..100),
+      height: rand(10..100),
+      material: Faker::Vehicle.manufacture
+      )
+    d.save
+  end
+end
+
+10.times do 
+  dc = PaysageCategory.create(title: Faker::Artist.name)
+  100.times do 
+    d = Paysage.new(
+      title: Faker::Color.color_name,
+      image_url: images_array[rand(1..50)]["image_link"],
+      paysage_category_id: dc.id,
+      ref: rand(1..1000),
+      width: rand(10..100),
+      height: rand(10..100),
+      material: Faker::Vehicle.manufacture
+      )
+    d.save
+  end
+end
+
+10.times do 
+  dc = CarnetCategory.create(title: Faker::Artist.name)
+  100.times do 
+    d = Carnet.new(
+      title: Faker::Color.color_name,
+      image_url: images_array[rand(1..50)]["image_link"],
+      carnet_category_id: dc.id,
+      ref: rand(1..1000),
+      width: rand(10..100),
+      height: rand(10..100),
+      material: Faker::Vehicle.manufacture
+      )
+    d.save
+  end
+end
+
 
 puts "%%%%%%%%%%%%%%%% DATABASE REMPLIE AVEC SUCCESS %%%%%%%%%%%%%%%%%%%%%%%"
 

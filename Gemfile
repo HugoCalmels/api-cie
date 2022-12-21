@@ -10,6 +10,7 @@ gem 'kaminari', '~> 0.17.0'
 gem 'aws-sdk-s3', '~> 1.114'
 gem 'mini_magick', '~> 4.11'
 gem 'rest-client'
+gem "faker"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.7'
 # Use postgresql as the database for Active Record
