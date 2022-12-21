@@ -39,21 +39,6 @@ class Api::V1::DessinCategoriesController < ApplicationController
     end
   end
 
-  def paginateMoreDessins
-
-    puts "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
-    
-    puts "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
-    puts "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
-    puts params[:dessin_category_id]
-    puts "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
-    puts "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
-
-   
-    render json: @dessins_categories, include: [:dessins]
-
-  end
-
   private
 
   def dessin_category_params

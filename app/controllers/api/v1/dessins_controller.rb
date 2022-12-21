@@ -10,7 +10,12 @@ class Api::V1::DessinsController < ApplicationController
   end
 
   def create
-
+    puts "HELO??"
+    puts "HELO??"
+    puts "HELO??"
+    puts "HELO??"
+    puts "HELO??"
+    puts "HELO??"
     @dessin= Dessin.new(dessin_params)
     if @dessin.save
       render json: @dessin
@@ -42,10 +47,6 @@ class Api::V1::DessinsController < ApplicationController
 
   def getAllDessins
     @dessins_categories = DessinCategory.all 
-    #@postsTest2 = Kaminari.paginate_array(@posts.reverse()).page(params[:page]).per(5)
-  
-
-   
     render json: @dessins_categories, include: [:dessins]
   end
 

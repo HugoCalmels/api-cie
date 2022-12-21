@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_12_011618) do
+ActiveRecord::Schema.define(version: 2022_11_30_164808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,10 +68,56 @@ ActiveRecord::Schema.define(version: 2022_11_12_011618) do
     t.index ["dessin_category_id"], name: "index_dessins_on_dessin_category_id"
   end
 
+  create_table "home_temp_images", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "homes", force: :cascade do |t|
+    t.bigint "type_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.text "image_url"
+    t.index ["type_id"], name: "index_homes_on_type_id"
+  end
+
   create_table "jwt_denylist", force: :cascade do |t|
     t.string "jti", null: false
     t.datetime "exp", null: false
     t.index ["jti"], name: "index_jwt_denylist_on_jti"
+  end
+
+  create_table "paysage_categories", force: :cascade do |t|
+    t.text "title"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "paysage_temp_images", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "paysages", force: :cascade do |t|
+    t.bigint "paysage_category_id", null: false
+    t.text "image_url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.text "title"
+    t.text "height"
+    t.text "width"
+    t.text "material"
+    t.text "ref"
+    t.boolean "has_to_be_displayed", default: true
+    t.index ["paysage_category_id"], name: "index_paysages_on_paysage_category_id"
+  end
+
+  create_table "types", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.text "label"
+    t.text "desc"
   end
 
   create_table "users", force: :cascade do |t|
@@ -89,4 +135,6 @@ ActiveRecord::Schema.define(version: 2022_11_12_011618) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "dessins", "dessin_categories"
+  add_foreign_key "homes", "types"
+  add_foreign_key "paysages", "paysage_categories"
 end
