@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_30_164808) do
+ActiveRecord::Schema.define(version: 2022_12_21_175911) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,31 @@ ActiveRecord::Schema.define(version: 2022_11_30_164808) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "carnet_categories", force: :cascade do |t|
+    t.text "title"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "carnet_temp_images", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "carnets", force: :cascade do |t|
+    t.bigint "carnet_category_id", null: false
+    t.text "image_url"
+    t.text "title"
+    t.text "height"
+    t.text "width"
+    t.text "material"
+    t.text "ref"
+    t.boolean "has_to_be_displayed", default: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["carnet_category_id"], name: "index_carnets_on_carnet_category_id"
   end
 
   create_table "dessin_categories", force: :cascade do |t|
@@ -134,6 +159,7 @@ ActiveRecord::Schema.define(version: 2022_11_30_164808) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "carnets", "carnet_categories"
   add_foreign_key "dessins", "dessin_categories"
   add_foreign_key "homes", "types"
   add_foreign_key "paysages", "paysage_categories"

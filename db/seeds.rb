@@ -6,15 +6,16 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-
-images = RestClient.get("https://api-images-seeder-rails.herokuapp.com/post_images")
-images_array = JSON.parse(images)
-
 u = User.new(
   email: "admin@gmail.com",
   password: "123123"
 )
 u.save
+
+images = RestClient.get("https://api-images-seeder-rails.herokuapp.com/post_images")
+images_array = JSON.parse(images)
+
+
 
 # Types index/blog
 Type.create(label: "carrousel")

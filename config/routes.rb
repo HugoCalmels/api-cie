@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   devise_for :users,
   controllers: {
       sessions: 'users/sessions',
@@ -13,6 +14,8 @@ namespace :api do
     get "getAllDessins", to: "dessins#getAllDessins"
     get "paysage-latest", to: "paysage_temp_images#latest"
     get "getAllPaysages", to: "paysages#getAllPaysages"
+    get "carnet-latest", to: "carnet_temp_images#latest"
+    get "getAllCarnets", to: "carnets#getAllCarnets"
 
     get "home-latest", to: "home_temp_images#latest"
     resources :types
@@ -26,6 +29,11 @@ namespace :api do
     resources :paysage_temp_images
     resources :paysage_categories do 
       resources :paysages do 
+      end
+    end
+    resources :carnet_temp_images
+    resources :carnet_categories do 
+      resources :carnets do 
       end
     end
   end
