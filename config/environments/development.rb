@@ -1,7 +1,7 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.routes.default_url_options = {
-  host: "https://api-cie.herokuapp.com"
+  host: "http://localhost:3000"
 }
 #"https://api-cie.herokuapp.com"
 Rails.application.configure do

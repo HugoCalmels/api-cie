@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_21_175911) do
+ActiveRecord::Schema.define(version: 2023_01_04_140731) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -137,6 +137,31 @@ ActiveRecord::Schema.define(version: 2022_12_21_175911) do
     t.index ["paysage_category_id"], name: "index_paysages_on_paysage_category_id"
   end
 
+  create_table "photo_categories", force: :cascade do |t|
+    t.text "title"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "photo_temp_images", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "photos", force: :cascade do |t|
+    t.bigint "photo_category_id", null: false
+    t.text "image_url"
+    t.text "title"
+    t.text "height"
+    t.text "width"
+    t.text "material"
+    t.text "ref"
+    t.boolean "has_to_be_displayed", default: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["photo_category_id"], name: "index_photos_on_photo_category_id"
+  end
+
   create_table "types", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
@@ -163,4 +188,5 @@ ActiveRecord::Schema.define(version: 2022_12_21_175911) do
   add_foreign_key "dessins", "dessin_categories"
   add_foreign_key "homes", "types"
   add_foreign_key "paysages", "paysage_categories"
+  add_foreign_key "photos", "photo_categories"
 end
