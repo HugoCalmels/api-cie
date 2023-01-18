@@ -39,6 +39,7 @@ class Api::V1::NewslettersController < ApplicationController
       #object.email = guest.email
       NewsletterMailer.newsletter(params[:body][:template], guest.email, guest.verification_token).deliver_now
     end
+    render json: { message: "all newsletter emails sent"}, status: 200
   end
 
   # POST /newsletters
