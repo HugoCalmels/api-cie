@@ -1,5 +1,6 @@
 
   class Api::V1::HomeTempImagesController < ApplicationController
+    before_action :authenticate_user!, only: [:create, :update, :destroy]
     before_action :set_home_temp_image, only: [:show, :update, :destroy]
   
     # GET /dessin_temp_images

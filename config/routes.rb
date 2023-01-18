@@ -3,6 +3,12 @@ Rails.application.routes.draw do
 
 
 
+
+
+
+
+  resources :newsletters
+
   devise_for :users,
   controllers: {
       sessions: 'users/sessions',
@@ -22,6 +28,26 @@ namespace :api do
     get "home-latest", to: "home_temp_images#latest"
 
     get "photo-latest", to: "photo_temp_images#latest"
+
+    post "send-to-all-guests", to: "newsletters#send_to_all_guests"
+
+    get "quit-newsletter/:token", to: "guests#destroy_by_token"
+
+    resources :guests
+    resources :friends 
+    get "getLinkFriends/:link", to: "friends#getLink"
+    resources :contact_demands
+  
+    resources :thumbnail_previews
+ 
+    post "getLink", to: "thumbnail_previews#getLink"
+    # PERFORMANCES
+    get "video-latest", to: "performance_temp_videos#latest"
+    resources :performance_temp_videos
+    resources :performance_categories
+    resources :performances do 
+      resources :extra_performance_videos
+    end
 
     # PHOTOS 
     resources :photos

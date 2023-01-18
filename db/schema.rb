@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_04_140731) do
+ActiveRecord::Schema.define(version: 2023_01_11_202149) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,14 @@ ActiveRecord::Schema.define(version: 2023_01_04_140731) do
     t.index ["carnet_category_id"], name: "index_carnets_on_carnet_category_id"
   end
 
+  create_table "contact_demands", force: :cascade do |t|
+    t.text "name"
+    t.text "email"
+    t.text "subject"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "dessin_categories", force: :cascade do |t|
     t.text "title"
     t.datetime "created_at", precision: 6, null: false
@@ -93,6 +101,32 @@ ActiveRecord::Schema.define(version: 2023_01_04_140731) do
     t.index ["dessin_category_id"], name: "index_dessins_on_dessin_category_id"
   end
 
+  create_table "extra_performance_videos", force: :cascade do |t|
+    t.string "title"
+    t.string "video_url"
+    t.bigint "performance_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["performance_id"], name: "index_extra_performance_videos_on_performance_id"
+  end
+
+  create_table "friends", force: :cascade do |t|
+    t.text "website_link"
+    t.text "description"
+    t.text "title"
+    t.text "url"
+    t.text "image"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "guests", force: :cascade do |t|
+    t.string "email"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.text "verification_token"
+  end
+
   create_table "home_temp_images", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -110,6 +144,11 @@ ActiveRecord::Schema.define(version: 2023_01_04_140731) do
     t.string "jti", null: false
     t.datetime "exp", null: false
     t.index ["jti"], name: "index_jwt_denylist_on_jti"
+  end
+
+  create_table "newsletters", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "paysage_categories", force: :cascade do |t|
@@ -137,6 +176,28 @@ ActiveRecord::Schema.define(version: 2023_01_04_140731) do
     t.index ["paysage_category_id"], name: "index_paysages_on_paysage_category_id"
   end
 
+  create_table "performance_categories", force: :cascade do |t|
+    t.text "title"
+    t.text "released_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "performance_temp_videos", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "performances", force: :cascade do |t|
+    t.text "video_url"
+    t.text "title"
+    t.text "desc"
+    t.text "featuring"
+    t.text "website_link"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "photo_categories", force: :cascade do |t|
     t.text "title"
     t.datetime "created_at", precision: 6, null: false
@@ -160,6 +221,11 @@ ActiveRecord::Schema.define(version: 2023_01_04_140731) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["photo_category_id"], name: "index_photos_on_photo_category_id"
+  end
+
+  create_table "thumbnail_previews", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "types", force: :cascade do |t|
@@ -186,6 +252,7 @@ ActiveRecord::Schema.define(version: 2023_01_04_140731) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "carnets", "carnet_categories"
   add_foreign_key "dessins", "dessin_categories"
+  add_foreign_key "extra_performance_videos", "performances"
   add_foreign_key "homes", "types"
   add_foreign_key "paysages", "paysage_categories"
   add_foreign_key "photos", "photo_categories"

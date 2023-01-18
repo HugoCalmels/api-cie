@@ -100,6 +100,24 @@ end
   end
 end
 
+## SEED PHOTOS 
+
+10.times do 
+  dc = PhotoCategory.create(title: Faker::Artist.name)
+
+  100.times do 
+    d = Photo.new(
+      title: Faker::Color.color_name,
+      image_url: images_array[rand(1..50)]["image_link"],
+      photo_category_id: dc.id,
+      ref: rand(1..1000),
+      width: rand(10..100),
+      height: rand(10..100),
+      material: Faker::Vehicle.manufacture
+      )
+    d.save
+  end
+end
 
 puts "%%%%%%%%%%%%%%%% DATABASE REMPLIE AVEC SUCCESS %%%%%%%%%%%%%%%%%%%%%%%"
 

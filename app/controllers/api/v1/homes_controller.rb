@@ -1,4 +1,5 @@
 class Api::V1::HomesController < ApplicationController
+  before_action :authenticate_user!, only: [:create, :update, :destroy]
   def index
     #@homes = Home.all
     #render json: @homes

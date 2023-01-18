@@ -1,4 +1,5 @@
 class Api::V1::PhotoTempImagesController < ApplicationController
+  before_action :authenticate_user!, only: [:create, :update, :destroy]
   before_action :set_photo_temp_image, only: [:show, :update, :destroy]
 
   # GET /photo_temp_images

@@ -1,4 +1,5 @@
 class Api::V1::PhotoCategoriesController < ApplicationController
+  before_action :authenticate_user!, only: [:create, :update, :destroy]
   before_action :set_photo_category, only: [:show, :update, :destroy]
 
   # GET /photo_categories
@@ -46,6 +47,6 @@ class Api::V1::PhotoCategoriesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def photo_category_params
-      params.require(:photo_category).permit(:title)
+      params.require(:photo_category).permit(:video)
     end
 end

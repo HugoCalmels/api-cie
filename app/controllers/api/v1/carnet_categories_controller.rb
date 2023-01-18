@@ -1,5 +1,5 @@
 class Api::V1::CarnetCategoriesController < ApplicationController
-
+  before_action :authenticate_user!, only: [:create, :update, :destroy]
   def index
     @carnet_categories = CarnetCategory.all
     render json: @carnet_categories

@@ -1,5 +1,5 @@
 class Api::V1::DessinCategoriesController < ApplicationController
-
+  before_action :authenticate_user!, only: [:create, :update, :destroy]
   def index
     @dessin_categories = DessinCategory.all
     render json: @dessin_categories

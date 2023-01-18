@@ -1,5 +1,5 @@
 class Api::V1::DessinTempImagesController < ApplicationController
-
+  before_action :authenticate_user!, only: [:create, :update, :destroy]
   before_action :set_dessin_temp_image, only: [:show, :update, :destroy]
 
   # GET /dessin_temp_images

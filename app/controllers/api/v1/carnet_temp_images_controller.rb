@@ -1,5 +1,5 @@
 class Api::V1::CarnetTempImagesController < ApplicationController
-
+  before_action :authenticate_user!, only: [:update, :destroy]
   before_action :set_carnet_temp_image, only: [:show, :update, :destroy]
 
   # GET /dessin_temp_images

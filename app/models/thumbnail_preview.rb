@@ -1,0 +1,2 @@
+class ThumbnailPreview < ApplicationRecord
+end

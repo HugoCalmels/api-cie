@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.0'
 # custom gems
+gem 'link_thumbnailer'
 gem 'devise'
 gem 'devise-jwt'
 gem 'rack-cors'
@@ -11,6 +12,7 @@ gem 'aws-sdk-s3', '~> 1.114'
 gem 'mini_magick', '~> 4.11'
 gem 'rest-client'
 gem "faker"
+gem "dotenv-rails"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.7'
 # Use postgresql as the database for Active Record

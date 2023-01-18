@@ -1,5 +1,5 @@
 class Api::V1::PaysageCategoriesController < ApplicationController
- 
+  before_action :authenticate_user!, only: [:create, :update, :destroy]
   def index
     @paysage_categories = PaysageCategory.all
     render json: @paysage_categories
