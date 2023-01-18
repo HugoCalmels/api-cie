@@ -7,8 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 u = User.new(
-  email: "admin@gmail.com",
-  password: "123123"
+  email: "gaelle.boucherit@gmail.com",
+  password: "YDceh&23a!grFAMZ"
 )
 u.save
 
@@ -51,12 +51,12 @@ Home.create(
 ## SEED DES IMAGES GALERIES
 
 
-10.times do 
-  dc = DessinCategory.create(title: Faker::Artist.name)
+1.times do 
+  dc = DessinCategory.create(title: "Exemple titre")
 
-  100.times do 
+  3.times do 
     d = Dessin.new(
-      title: Faker::Color.color_name,
+      title: "Exemple titre",
       image_url: images_array[rand(1..50)]["image_link"],
       dessin_category_id: dc.id,
       ref: rand(1..1000),
@@ -68,11 +68,11 @@ Home.create(
   end
 end
 
-10.times do 
-  dc = PaysageCategory.create(title: Faker::Artist.name)
-  100.times do 
+1.times do 
+  dc = PaysageCategory.create(title: "Exemple titre")
+  3.times do 
     d = Paysage.new(
-      title: Faker::Color.color_name,
+      title: "Exemple titre",
       image_url: images_array[rand(1..50)]["image_link"],
       paysage_category_id: dc.id,
       ref: rand(1..1000),
@@ -84,11 +84,11 @@ end
   end
 end
 
-10.times do 
-  dc = CarnetCategory.create(title: Faker::Artist.name)
-  100.times do 
+1.times do 
+  dc = CarnetCategory.create(title: "Exemple titre")
+  3.times do 
     d = Carnet.new(
-      title: Faker::Color.color_name,
+      title: "Exemple titre",
       image_url: images_array[rand(1..50)]["image_link"],
       carnet_category_id: dc.id,
       ref: rand(1..1000),
@@ -102,12 +102,12 @@ end
 
 ## SEED PHOTOS 
 
-10.times do 
-  dc = PhotoCategory.create(title: Faker::Artist.name)
+1.times do 
+  dc = PhotoCategory.create(title: "Exemple titre")
 
-  100.times do 
+  3.times do 
     d = Photo.new(
-      title: Faker::Color.color_name,
+      title: "Exemple titre",
       image_url: images_array[rand(1..50)]["image_link"],
       photo_category_id: dc.id,
       ref: rand(1..1000),
